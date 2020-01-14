@@ -1,0 +1,20 @@
+GAL22V10
+DIAGROM
+
+NC A5 A6 A7 A14 A15 M1 IOREQ WR MREQ Q5 GND
+NC X NOTQ5 NC NC NC NC NC LED ROMPAGE FLASHCE VCC	 
+
+NOTQ5 = /Q5						; just invert whatever comes out of U5 Q5
+
+X = A6 + A7 + IOREQ + WR 		; all these should be LOW
+
+LED = A5 * /X * M1				; High A5 AND not X and M1
+
+ROMPAGE = /A5 * /X * M1			; LOW A5 AND not X and M1
+
+FLASHCE = /A14 * /A15 * MREQ * NOTQ5 ; needs a selector to deactivate external rom
+
+
+DESCRIPTION:
+Substitute for glue logic on the
+ZX DiagCart
